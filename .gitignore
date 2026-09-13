@@ -1,0 +1,39 @@
+# Java / Maven build output
+target/
+*.class
+
+# IDE project files
+.idea/
+*.iml
+*.ipr
+*.iws
+.project
+.classpath
+.settings/
+*.eclipse
+*.vscode/
+
+# Maven wrapper (keep or remove as preferred)
+.mvn/
+
+# OS-generated files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Application data files (generated at runtime)
+portfolio.db
+portfolio.db-shm
+portfolio.db-wal
+alerts.log
+
+# Credentials — NEVER commit these
+application-local.properties
+
+# Log files
+*.log
+logs/
+
+# Test output
+surefire-reports/
+failsafe-reports/
