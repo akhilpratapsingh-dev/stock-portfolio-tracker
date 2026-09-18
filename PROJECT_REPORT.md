@@ -326,7 +326,7 @@ public static String validateSymbol(String input) {
 ## 10. Screenshots / Execution Results
 
 ### 10.1 Interactive Console Portfolio Valuation Dashboard
-![Interactive Console Portfolio Valuation](docs/screenshots/screenshot_2_portfolio_dashboard.png)
+![Interactive Console Portfolio Valuation](docs/screenshots/screenshot_2_portfolio_table.png)
 
 ### 10.2 Real-Time Live Alert Notification & Database Dispatch
 ![Live Alert Triggered](docs/screenshots/screenshot_3_live_alert.png)
@@ -335,7 +335,7 @@ public static String validateSymbol(String input) {
 ![Concentration Risk Analysis](docs/screenshots/screenshot_4_risk_analysis.png)
 
 ### 10.4 Automated JUnit 5 Verification Suite (42 Passed)
-![Test Suite Passing](docs/screenshots/screenshot_1_test_suite.png)
+![Test Suite Passing](docs/screenshots/screenshot_1_maven_tests.png)
 
 ---
 

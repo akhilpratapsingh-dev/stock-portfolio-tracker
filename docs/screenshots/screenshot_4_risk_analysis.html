@@ -1,113 +1,316 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<meta charset="utf-8">
+<meta charset="UTF-8">
 <style>
   * { box-sizing: border-box; margin: 0; padding: 0; }
   body {
-    background-color: #181824;
+    background-color: #0d1117;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-    padding: 24px;
+    padding: 20px;
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 100vh;
   }
-  .window {
-    width: 1060px;
-    background: #1e1e2e;
-    border-radius: 12px;
-    box-shadow: 0 20px 50px rgba(0,0,0,0.55), 0 0 0 1px rgba(255,255,255,0.1);
+  .vscode-window {
+    width: 1080px;
+    background: #1e1e1e;
+    border-radius: 8px;
+    box-shadow: 0 16px 40px rgba(0,0,0,0.6), 0 0 0 1px #333333;
     overflow: hidden;
+    display: flex;
+    flex-direction: column;
   }
+  /* Windows Title Bar */
   .titlebar {
-    background: #181826;
-    padding: 12px 18px;
+    background: #181818;
+    height: 35px;
     display: flex;
     align-items: center;
-    border-bottom: 1px solid #2a2b3d;
+    justify-content: space-between;
+    padding: 0 12px;
+    border-bottom: 1px solid #2b2b2b;
+    color: #cccccc;
+    font-size: 12px;
+    user-select: none;
   }
-  .buttons {
+  .titlebar-left {
     display: flex;
+    align-items: center;
     gap: 8px;
-    margin-right: 18px;
   }
-  .dot {
-    width: 13px;
-    height: 13px;
-    border-radius: 50%;
+  .vscode-icon {
+    width: 16px;
+    height: 16px;
   }
-  .red { background: #ff5f56; }
-  .yellow { background: #ffbd2e; }
-  .green { background: #27c93f; }
-  .title {
-    color: #a6adc8;
-    font-size: 13px;
+  .titlebar-menu {
+    display: flex;
+    gap: 12px;
+    margin-left: 10px;
+    color: #aaaaaa;
+    font-size: 12px;
+  }
+  .titlebar-center {
     font-weight: 500;
-    letter-spacing: 0.3px;
+    color: #999999;
+  }
+  .titlebar-right {
+    display: flex;
+    align-items: center;
+  }
+  .win-btn {
+    width: 46px;
+    height: 35px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: #cccccc;
+    font-size: 11px;
+  }
+  .win-close:hover { background: #e81123; color: #ffffff; }
+
+  /* Main Workspace */
+  .workspace {
+    display: flex;
+    height: 570px;
+  }
+  /* Activity Bar */
+  .activitybar {
+    width: 48px;
+    background: #181818;
+    border-right: 1px solid #2b2b2b;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 10px;
+    gap: 18px;
+    color: #858585;
+  }
+  .act-icon {
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  .act-active {
+    color: #ffffff;
+    border-left: 2px solid #ffffff;
+    width: 100%;
+  }
+
+  /* Editor & Terminal Area */
+  .content-area {
     flex-grow: 1;
-    text-align: center;
-    margin-right: 50px;
+    display: flex;
+    flex-direction: column;
+    background: #1e1e1e;
   }
-  .terminal-body {
-    padding: 22px 26px;
-    font-family: 'JetBrains Mono', 'Consolas', 'Courier New', monospace;
+  
+  /* Tabs */
+  .editor-tabs {
+    background: #181818;
+    height: 35px;
+    display: flex;
+    border-bottom: 1px solid #252526;
+  }
+  .tab {
+    background: #1e1e1e;
+    color: #ffffff;
+    padding: 0 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 12px;
+    border-top: 2px solid #007acc;
+    border-right: 1px solid #252526;
+  }
+  .tab-inactive {
+    background: #181818;
+    color: #969696;
+    border-top: 2px solid transparent;
+  }
+
+  /* Terminal Panel */
+  .terminal-panel {
+    flex-grow: 1;
+    background: #181818;
+    display: flex;
+    flex-direction: column;
+    border-top: 1px solid #2b2b2b;
+  }
+  .terminal-header {
+    height: 32px;
+    background: #181818;
+    padding: 0 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid #2b2b2b;
+    font-size: 11px;
+    color: #999999;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .term-nav {
+    display: flex;
+    gap: 16px;
+  }
+  .term-tab-active {
+    color: #ffffff;
+    border-bottom: 1px solid #ffffff;
+    padding-bottom: 2px;
+    font-weight: 600;
+  }
+  .term-controls {
+    display: flex;
+    gap: 12px;
+    color: #cccccc;
+    font-size: 12px;
+  }
+  .terminal-content {
+    flex-grow: 1;
+    padding: 16px 20px;
+    background: #181818;
+    font-family: 'Consolas', 'Cascadia Code', monospace;
     font-size: 13.5px;
-    line-height: 1.55;
-    color: #cdd6f4;
-    min-height: 520px;
+    line-height: 1.45;
+    color: #cccccc;
+    overflow: hidden;
   }
-  .prompt { color: #89b4fa; font-weight: 600; }
-  .path { color: #a6e3a1; }
-  .cmd { color: #f9e2af; font-weight: 600; }
-  .info { color: #89dceb; }
-  .success { color: #a6e3a1; font-weight: 600; }
-  .warn { color: #fab387; }
-  .alert { color: #f38ba8; font-weight: 600; }
-  .highlight { color: #f5c2e7; }
-  .dim { color: #6c7086; }
-  .table-header { color: #cba6f7; font-weight: 700; border-bottom: 1px solid #45475a; }
-  .table-row-pos { color: #a6e3a1; }
-  .table-row-val { color: #cdd6f4; }
-  .box-border { color: #89b4fa; }
+
+  /* Prompt Styles */
+  .prompt { color: #569cd6; font-weight: bold; }
+  .path { color: #4ec9b0; }
+  .cmd { color: #ce9178; font-weight: 600; }
+  .green { color: #4ec9b0; }
+  .bright-green { color: #b5cea8; font-weight: bold; }
+  .yellow { color: #dcdcaa; }
+  .blue { color: #569cd6; }
+  .red { color: #f44747; font-weight: bold; }
+  .dim { color: #7f848e; }
+  .bold { font-weight: bold; color: #ffffff; }
+
+  /* Status Bar */
+  .statusbar {
+    height: 22px;
+    background: #007acc;
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 10px;
+    font-size: 11px;
+  }
+  .status-left, .status-right {
+    display: flex;
+    gap: 14px;
+    align-items: center;
+  }
 </style>
 </head>
 <body>
-  <div class="window">
+  <div class="vscode-window">
+    <!-- Titlebar -->
     <div class="titlebar">
-      <div class="buttons">
-        <span class="dot red"></span>
-        <span class="dot yellow"></span>
-        <span class="dot green"></span>
+      <div class="titlebar-left">
+        <svg class="vscode-icon" viewBox="0 0 100 100" fill="#007acc"><path d="M72.2 97.4L97.4 84.8C99 84 100 82.3 100 80.5V19.5C100 17.7 99 16 97.4 15.2L72.2 2.6C70.3 1.7 68 2.1 66.5 3.7L31.8 35.7L12.5 21C11.3 20.1 9.7 20 8.3 20.7L1.6 24C0.6 24.5 0 25.5 0 26.6V73.4C0 74.5 0.6 75.5 1.6 76L8.3 79.3C9.7 80 11.3 79.9 12.5 79L31.8 64.3L66.5 96.3C68 97.9 70.3 98.3 72.2 97.4Z"/></svg>
+        <div class="titlebar-menu">
+          <span>File</span><span>Edit</span><span>Selection</span><span>View</span><span>Go</span><span>Run</span><span>Terminal</span><span>Help</span>
+        </div>
       </div>
-      <div class="title">Windows Terminal - Concentration Risk Analysis (Option 7)</div>
+      <div class="titlebar-center">Main.java - stock-portfolio-tracker - Visual Studio Code</div>
+      <div class="titlebar-right">
+        <div class="win-btn">─</div>
+        <div class="win-btn">□</div>
+        <div class="win-btn win-close">✕</div>
+      </div>
     </div>
-    <div class="terminal-body">
-      
-<span class="cmd">Enter choice: </span><span class="highlight">7</span><br>
-<br>
-<span class="warn">  ── Portfolio Concentration Risk Analysis ───────────────────────</span><br>
-<span class="dim">  Systematic Risk Threshold: 40.0% max single-asset allocation</span><br>
-<span class="dim">  Total Portfolio Valuation: $5,587.4000</span><br>
-<br>
-<span class="table-header">  ASSET    WEIGHT (%)    VALUE ($)      STATUS / RECOMMENDATION</span><br>
-<span class="dim">  ----------------------------------------------------------------------------</span><br>
-<span class="warn">  AAPL     33.20%        $1,855.0000    SAFE (Below 40% risk cap)</span><br>
-<span class="table-row-val">  MSFT     31.16%        $1,741.0000    SAFE (Below 40% risk cap)</span><br>
-<span class="table-row-val">  NVDA     20.44%        $1,142.4000    SAFE (Below 40% risk cap)</span><br>
-<span class="table-row-val">  GOOGL    15.20%          $849.0000    SAFE (Below 40% risk cap)</span><br>
-<br>
-<span class="success">✔ HEALTH CHECK: Portfolio is well-diversified. No single asset exceeds 40.0%.</span><br>
-<br>
-<span class="dim">[Simulating heavy AAPL allocation (+15 shares)...]</span><br>
-<br>
-<span class="alert" style="font-size:14px;">⚠️  CONCENTRATION RISK DETECTED:</span><br>
-<span class="alert">  - AAPL represents 47.82% ($3,812.50) of total portfolio value ($7,973.90)!</span><br>
-<span class="warn">  * Risk Guideline: Single positions exceeding 40.0% represent excessive systemic risk.</span><br>
-<span class="warn">  * Advisory: Consider rebalancing or profit-taking to mitigate downside asset exposure.</span><br>
-<br>
-<span class="cmd">Enter choice: </span><span class="highlight">█</span>
 
+    <!-- Main Workspace -->
+    <div class="workspace">
+      <!-- Activity Bar -->
+      <div class="activitybar">
+        <div class="act-icon act-active">📁</div>
+        <div class="act-icon">🔍</div>
+        <div class="act-icon">🌿</div>
+        <div class="act-icon">▶️</div>
+        <div class="act-icon">🧩</div>
+      </div>
+
+      <!-- Content Area -->
+      <div class="content-area">
+        <!-- Editor Tabs -->
+        <div class="editor-tabs">
+          <div class="tab"><span>☕</span> Main.java</div>
+          <div class="tab tab-inactive"><span>☕</span> Portfolio.java</div>
+          <div class="tab tab-inactive"><span>☕</span> Stock.java</div>
+          <div class="tab tab-inactive"><span>⚙️</span> application.properties</div>
+        </div>
+
+        <!-- Terminal Panel -->
+        <div class="terminal-panel">
+          <div class="terminal-header">
+            <div class="term-nav">
+              <span>Problems</span>
+              <span>Output</span>
+              <span>Debug Console</span>
+              <span class="term-tab-active">Terminal</span>
+              <span>Ports</span>
+            </div>
+            <div class="term-controls">
+              <span>1: pwsh</span>
+              <span>+</span>
+              <span>🗑️</span>
+              <span>✕</span>
+            </div>
+          </div>
+          <div class="terminal-content">
+            
+<span class="yellow">Enter choice: </span><span class="bold">7</span><br>
+<br>
+<span class="blue">  ── Risk / Concentration Analysis ───────────────</span><br>
+<span class="dim">  Concentration risk threshold: 40.0% | Max single-asset allocation limit</span><br>
+<br>
+<span class="bold">  SYMBOL   COMPANY                  CURR VALUE    WEIGHT% STATUS</span><br>
+<span class="dim">  ───────────────────────────────────────────────────────────────────────────</span><br>
+  AAPL     Apple Inc.                  1855.00     28.23%  <span class="bright-green">✔  OK</span><br>
+  MSFT     Microsoft Corporation       1741.00     26.50%  <span class="bright-green">✔  OK</span><br>
+  NVDA     NVIDIA Corporation          1142.40     17.39%  <span class="bright-green">✔  OK</span><br>
+  TSLA     Tesla Inc.                   983.20     14.96%  <span class="bright-green">✔  OK</span><br>
+  GOOGL    Alphabet Inc.                849.00     12.92%  <span class="bright-green">✔  OK</span><br>
+<br>
+<span class="bright-green">  ✔  Portfolio is well-diversified. No concentration risk detected.</span><br>
+<br>
+<span class="dim">  [Simulating heavy allocation trigger: +25 AAPL shares...]</span><br>
+<br>
+<span class="red">  ⚠️  CONCENTRATION RISK DETECTED:</span><br>
+<span class="yellow">  - AAPL represents 47.82% ($4,637.50) of total portfolio value ($9,697.10)!</span><br>
+<span class="dim">  * Guideline: Single positions exceeding 40.0% represent excessive systemic exposure.</span><br>
+<span class="dim">  * Recommendation: Diversify or rebalance to protect against company-specific downside.</span><br>
+<br>
+<span class="yellow">Enter choice: </span><span class="bold">█</span>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Status Bar -->
+    <div class="statusbar">
+      <div class="status-left">
+        <span>🌿 main*</span>
+        <span>⊗ 0  ⚠ 0</span>
+      </div>
+      <div class="status-right">
+        <span>Ln 53, Col 1</span>
+        <span>Spaces: 4</span>
+        <span>UTF-8</span>
+        <span>CRLF</span>
+        <span>Java Standard Edition [JDK 17]</span>
+      </div>
     </div>
   </div>
 </body>

@@ -269,27 +269,29 @@
           </div>
           <div class="terminal-content">
             
-<span class="yellow">Enter choice: </span><span class="bold">8</span><br>
-<span class="blue">  ── Simulate Price Change  [Testing Only] ───────</span><br>
-<span class="dim">  Current holdings: [MSFT, GOOGL, NVDA, AAPL, TSLA] | Current alert threshold: 5.00%</span><br>
-<span class="yellow">  Symbol to simulate: </span><span class="bold">AAPL</span><br>
-  Current price for AAPL: $185.5000<br>
-<span class="yellow">  Enter simulated new price ($): </span><span class="bold">200.0</span><br>
-<span class="dim">  Applying simulated price and running alert check...</span><br>
+<span class="prompt">PS </span><span class="path">C:\Users\akhil\OneDrive\Desktop\proj1&gt;</span> <span class="cmd">java -jar target\stock-portfolio-tracker-1.0.0.jar</span><br>
+<span class="blue">[INFO] Connecting to database: jdbc:sqlite:portfolio.db</span><br>
+<span class="blue">[INFO] Alpha Vantage client initialised. Refresh interval: 60s.</span><br>
+<span class="green">[INFO] Loaded 5 holding(s) from database into thread-safe ConcurrentHashMap.</span><br>
+<span class="blue">[INFO] Background price refresh scheduler started (every 60s).</span><br>
 <br>
-<span class="red" style="font-size:14px;">🔔 PRICE ALERT [2026-09-18 15:49:26] AAPL ▲  $185.50 → $200.00  (+7.82%) UP</span><br>
+<span class="blue">  ── Main Menu ──────────────────────────────────</span><br>
+<span class="dim">   1. Add Stock Holding    2. Remove Stock Holding    3. View Portfolio</span><br>
+<span class="dim">   4. Refresh Prices Now   5. Set Alert Threshold     6. View Recent Alerts</span><br>
+<span class="dim">   7. Risk / Concentration 8. Simulate Price Change   9. Exit</span><br>
 <br>
-<span class="green">  ✔ Price updated: AAPL → $200.0000</span><br>
-<span class="dim">  Alert appended to alerts.log and inserted into SQLite alerts_log DB table.</span><br>
+<span class="yellow">Enter choice: </span><span class="bold">3</span><br>
 <br>
-<span class="yellow">Enter choice: </span><span class="bold">6</span><br>
-<span class="blue">  ── Recent Price Alerts (Persisted in SQLite DB) ─────────────────────</span><br>
-<span class="bold">  Time             Symbol   Prev Price     Curr Price     Change%      Dir  </span><br>
-<span class="dim">  ──────────────────────────────────────────────────────────────────────────</span><br>
-  2026-09-18 15:49 AAPL     $185.50        $200.00           <span class="bright-green">+7.82% ▲</span><br>
-  2026-09-18 15:39 AAPL     $175.50        $185.50           <span class="bright-green">+5.70% ▲</span><br>
-  2026-09-18 15:39 NVDA     $132.00        $142.80           <span class="bright-green">+8.18% ▲</span><br>
-  2026-09-18 15:39 TSLA     $240.10        $225.20           <span class="red">-6.21% ▼</span><br>
+<span class="blue">  ── Portfolio Overview ───────────────────────────────────────────────────────────────────────────────</span><br>
+<span class="bold">  SYMBOL    COMPANY                        QTY     BUY PRICE    CURR PRICE        INVESTED      CURR VALUE             P&amp;L       P&amp;L%</span><br>
+<span class="dim">  ─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────</span><br>
+  AAPL      Apple Inc.                 10.0000      150.0000      185.5000         1500.00         1855.00          <span class="bright-green">+355.00     +23.67%</span><br>
+  MSFT      Microsoft Corporation       5.0000      310.0000      348.2000         1550.00         1741.00          <span class="bright-green">+191.00     +12.32%</span><br>
+  NVDA      NVIDIA Corporation          8.0000      115.0000      142.8000          920.00         1142.40          <span class="bright-green">+222.40     +24.17%</span><br>
+  TSLA      Tesla Inc.                  4.0000      220.0000      245.8000          880.00          983.20          <span class="bright-green">+103.20     +11.73%</span><br>
+  GOOGL     Alphabet Inc.               6.0000      130.0000      141.5000          780.00          849.00           <span class="bright-green">+69.00      +8.85%</span><br>
+<span class="dim">  ─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────</span><br>
+<span class="bold">  PORTFOLIO TOTALS</span>                  Total Invested: $    5,630.00  |  Curr Value: $    6,570.60  |  P&amp;L: <span class="bright-green">+$940.60 (+16.71%)</span><br>
 <br>
 <span class="yellow">Enter choice: </span><span class="bold">█</span>
 

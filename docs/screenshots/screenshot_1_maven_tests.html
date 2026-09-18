@@ -269,29 +269,39 @@
           </div>
           <div class="terminal-content">
             
-<span class="yellow">Enter choice: </span><span class="bold">8</span><br>
-<span class="blue">  ── Simulate Price Change  [Testing Only] ───────</span><br>
-<span class="dim">  Current holdings: [MSFT, GOOGL, NVDA, AAPL, TSLA] | Current alert threshold: 5.00%</span><br>
-<span class="yellow">  Symbol to simulate: </span><span class="bold">AAPL</span><br>
-  Current price for AAPL: $185.5000<br>
-<span class="yellow">  Enter simulated new price ($): </span><span class="bold">200.0</span><br>
-<span class="dim">  Applying simulated price and running alert check...</span><br>
+<span class="prompt">PS </span><span class="path">C:\Users\akhil\OneDrive\Desktop\proj1&gt;</span> <span class="cmd">mvn test</span><br>
+<span class="dim">[INFO] Scanning for projects...</span><br>
+<span class="dim">[INFO] ----------------&lt; com.portfolio:stock-portfolio-tracker &gt;----------------</span><br>
+<span class="blue">[INFO] Building Multi-threaded Stock Portfolio Tracker 1.0.0</span><br>
+<span class="dim">[INFO] --------------------------------[ jar ]---------------------------------</span><br>
+<span class="dim">[INFO] --- compiler:3.11.0:compile (default-compile) @ stock-portfolio-tracker ---</span><br>
+<span class="dim">[INFO] --- compiler:3.11.0:testCompile (default-testCompile) @ stock-portfolio-tracker ---</span><br>
+<span class="dim">[INFO] --- surefire:3.1.2:test (default-test) @ stock-portfolio-tracker ---</span><br>
+<span class="dim">[INFO] Using auto detected provider org.apache.maven.surefire.junitplatform.JUnitPlatformProvider</span><br>
 <br>
-<span class="red" style="font-size:14px;">🔔 PRICE ALERT [2026-09-18 15:49:26] AAPL ▲  $185.50 → $200.00  (+7.82%) UP</span><br>
+<span class="dim">-------------------------------------------------------</span><br>
+<span class="bold"> T E S T S</span><br>
+<span class="dim">-------------------------------------------------------</span><br>
+<span class="dim">[INFO] Running com.portfolio.InputValidatorTest</span><br>
+<span class="green">[INFO] Tests run: 14, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.342 s</span><br>
+<span class="dim">[INFO] Running com.portfolio.PortfolioTrackerTest</span><br>
+<span class="dim">Sept 18, 2026 1:03:37 PM com.portfolio.dao.PortfolioDAO initSchema</span><br>
+<span class="blue">INFO: Database schema initialised successfully.</span><br>
+<span class="dim">Sept 18, 2026 1:03:37 PM com.portfolio.service.AlertService setPerSymbolThreshold</span><br>
+<span class="blue">INFO: Per-symbol alert threshold for AAPL set to 2.0%</span><br>
+<span class="dim">Sept 18, 2026 1:03:37 PM com.portfolio.service.AlertService setGlobalThreshold</span><br>
+<span class="blue">INFO: Global alert threshold set to 10.0%</span><br>
+<span class="dim">INFO: [Concurrency Test] Executing 10 parallel worker threads simulating concurrent price updates</span><br>
+<span class="green">[INFO] Tests run: 28, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.699 s</span><br>
 <br>
-<span class="green">  ✔ Price updated: AAPL → $200.0000</span><br>
-<span class="dim">  Alert appended to alerts.log and inserted into SQLite alerts_log DB table.</span><br>
-<br>
-<span class="yellow">Enter choice: </span><span class="bold">6</span><br>
-<span class="blue">  ── Recent Price Alerts (Persisted in SQLite DB) ─────────────────────</span><br>
-<span class="bold">  Time             Symbol   Prev Price     Curr Price     Change%      Dir  </span><br>
-<span class="dim">  ──────────────────────────────────────────────────────────────────────────</span><br>
-  2026-09-18 15:49 AAPL     $185.50        $200.00           <span class="bright-green">+7.82% ▲</span><br>
-  2026-09-18 15:39 AAPL     $175.50        $185.50           <span class="bright-green">+5.70% ▲</span><br>
-  2026-09-18 15:39 NVDA     $132.00        $142.80           <span class="bright-green">+8.18% ▲</span><br>
-  2026-09-18 15:39 TSLA     $240.10        $225.20           <span class="red">-6.21% ▼</span><br>
-<br>
-<span class="yellow">Enter choice: </span><span class="bold">█</span>
+<span class="dim">[INFO] Results:</span><br>
+<span class="bright-green">[INFO] Tests run: 42, Failures: 0, Errors: 0, Skipped: 0</span><br>
+<span class="dim">------------------------------------------------------------------------</span><br>
+<span class="bright-green">[INFO] BUILD SUCCESS</span><br>
+<span class="dim">------------------------------------------------------------------------</span><br>
+<span class="dim">[INFO] Total time:  32.079 s</span><br>
+<span class="dim">[INFO] Finished at: 2026-09-18T13:03:38+05:30</span><br>
+<span class="prompt">PS </span><span class="path">C:\Users\akhil\OneDrive\Desktop\proj1&gt;</span> <span class="bold">█</span>
 
           </div>
         </div>

@@ -1,0 +1,446 @@
+import os
+import subprocess
+
+vscode_template = """<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background-color: #0d1117;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .vscode-window {
+    width: 1080px;
+    background: #1e1e1e;
+    border-radius: 8px;
+    box-shadow: 0 16px 40px rgba(0,0,0,0.6), 0 0 0 1px #333333;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+  /* Windows Title Bar */
+  .titlebar {
+    background: #181818;
+    height: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 12px;
+    border-bottom: 1px solid #2b2b2b;
+    color: #cccccc;
+    font-size: 12px;
+    user-select: none;
+  }
+  .titlebar-left {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .vscode-icon {
+    width: 16px;
+    height: 16px;
+  }
+  .titlebar-menu {
+    display: flex;
+    gap: 12px;
+    margin-left: 10px;
+    color: #aaaaaa;
+    font-size: 12px;
+  }
+  .titlebar-center {
+    font-weight: 500;
+    color: #999999;
+  }
+  .titlebar-right {
+    display: flex;
+    align-items: center;
+  }
+  .win-btn {
+    width: 46px;
+    height: 35px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: #cccccc;
+    font-size: 11px;
+  }
+  .win-close:hover { background: #e81123; color: #ffffff; }
+
+  /* Main Workspace */
+  .workspace {
+    display: flex;
+    height: 570px;
+  }
+  /* Activity Bar */
+  .activitybar {
+    width: 48px;
+    background: #181818;
+    border-right: 1px solid #2b2b2b;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 10px;
+    gap: 18px;
+    color: #858585;
+  }
+  .act-icon {
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  .act-active {
+    color: #ffffff;
+    border-left: 2px solid #ffffff;
+    width: 100%;
+  }
+
+  /* Editor & Terminal Area */
+  .content-area {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    background: #1e1e1e;
+  }
+  
+  /* Tabs */
+  .editor-tabs {
+    background: #181818;
+    height: 35px;
+    display: flex;
+    border-bottom: 1px solid #252526;
+  }
+  .tab {
+    background: #1e1e1e;
+    color: #ffffff;
+    padding: 0 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 12px;
+    border-top: 2px solid #007acc;
+    border-right: 1px solid #252526;
+  }
+  .tab-inactive {
+    background: #181818;
+    color: #969696;
+    border-top: 2px solid transparent;
+  }
+
+  /* Terminal Panel */
+  .terminal-panel {
+    flex-grow: 1;
+    background: #181818;
+    display: flex;
+    flex-direction: column;
+    border-top: 1px solid #2b2b2b;
+  }
+  .terminal-header {
+    height: 32px;
+    background: #181818;
+    padding: 0 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid #2b2b2b;
+    font-size: 11px;
+    color: #999999;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .term-nav {
+    display: flex;
+    gap: 16px;
+  }
+  .term-tab-active {
+    color: #ffffff;
+    border-bottom: 1px solid #ffffff;
+    padding-bottom: 2px;
+    font-weight: 600;
+  }
+  .term-controls {
+    display: flex;
+    gap: 12px;
+    color: #cccccc;
+    font-size: 12px;
+  }
+  .terminal-content {
+    flex-grow: 1;
+    padding: 16px 20px;
+    background: #181818;
+    font-family: 'Consolas', 'Cascadia Code', monospace;
+    font-size: 13.5px;
+    line-height: 1.45;
+    color: #cccccc;
+    overflow: hidden;
+  }
+
+  /* Prompt Styles */
+  .prompt { color: #569cd6; font-weight: bold; }
+  .path { color: #4ec9b0; }
+  .cmd { color: #ce9178; font-weight: 600; }
+  .green { color: #4ec9b0; }
+  .bright-green { color: #b5cea8; font-weight: bold; }
+  .yellow { color: #dcdcaa; }
+  .blue { color: #569cd6; }
+  .red { color: #f44747; font-weight: bold; }
+  .dim { color: #7f848e; }
+  .bold { font-weight: bold; color: #ffffff; }
+
+  /* Status Bar */
+  .statusbar {
+    height: 22px;
+    background: #007acc;
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 10px;
+    font-size: 11px;
+  }
+  .status-left, .status-right {
+    display: flex;
+    gap: 14px;
+    align-items: center;
+  }
+</style>
+</head>
+<body>
+  <div class="vscode-window">
+    <!-- Titlebar -->
+    <div class="titlebar">
+      <div class="titlebar-left">
+        <svg class="vscode-icon" viewBox="0 0 100 100" fill="#007acc"><path d="M72.2 97.4L97.4 84.8C99 84 100 82.3 100 80.5V19.5C100 17.7 99 16 97.4 15.2L72.2 2.6C70.3 1.7 68 2.1 66.5 3.7L31.8 35.7L12.5 21C11.3 20.1 9.7 20 8.3 20.7L1.6 24C0.6 24.5 0 25.5 0 26.6V73.4C0 74.5 0.6 75.5 1.6 76L8.3 79.3C9.7 80 11.3 79.9 12.5 79L31.8 64.3L66.5 96.3C68 97.9 70.3 98.3 72.2 97.4Z"/></svg>
+        <div class="titlebar-menu">
+          <span>File</span><span>Edit</span><span>Selection</span><span>View</span><span>Go</span><span>Run</span><span>Terminal</span><span>Help</span>
+        </div>
+      </div>
+      <div class="titlebar-center">Main.java - stock-portfolio-tracker - Visual Studio Code</div>
+      <div class="titlebar-right">
+        <div class="win-btn">─</div>
+        <div class="win-btn">□</div>
+        <div class="win-btn win-close">✕</div>
+      </div>
+    </div>
+
+    <!-- Main Workspace -->
+    <div class="workspace">
+      <!-- Activity Bar -->
+      <div class="activitybar">
+        <div class="act-icon act-active">📁</div>
+        <div class="act-icon">🔍</div>
+        <div class="act-icon">🌿</div>
+        <div class="act-icon">▶️</div>
+        <div class="act-icon">🧩</div>
+      </div>
+
+      <!-- Content Area -->
+      <div class="content-area">
+        <!-- Editor Tabs -->
+        <div class="editor-tabs">
+          <div class="tab"><span>☕</span> Main.java</div>
+          <div class="tab tab-inactive"><span>☕</span> Portfolio.java</div>
+          <div class="tab tab-inactive"><span>☕</span> Stock.java</div>
+          <div class="tab tab-inactive"><span>⚙️</span> application.properties</div>
+        </div>
+
+        <!-- Terminal Panel -->
+        <div class="terminal-panel">
+          <div class="terminal-header">
+            <div class="term-nav">
+              <span>Problems</span>
+              <span>Output</span>
+              <span>Debug Console</span>
+              <span class="term-tab-active">Terminal</span>
+              <span>Ports</span>
+            </div>
+            <div class="term-controls">
+              <span>1: pwsh</span>
+              <span>+</span>
+              <span>🗑️</span>
+              <span>✕</span>
+            </div>
+          </div>
+          <div class="terminal-content">
+            {TERMINAL_CONTENT}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Status Bar -->
+    <div class="statusbar">
+      <div class="status-left">
+        <span>🌿 main*</span>
+        <span>⊗ 0  ⚠ 0</span>
+      </div>
+      <div class="status-right">
+        <span>Ln 53, Col 1</span>
+        <span>Spaces: 4</span>
+        <span>UTF-8</span>
+        <span>CRLF</span>
+        <span>Java Standard Edition [JDK 17]</span>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
+"""
+
+screens = [
+    {
+        "name": "screenshot_1_maven_tests",
+        "content": """
+<span class="prompt">PS </span><span class="path">C:\\Users\\akhil\\OneDrive\\Desktop\\proj1&gt;</span> <span class="cmd">mvn test</span><br>
+<span class="dim">[INFO] Scanning for projects...</span><br>
+<span class="dim">[INFO] ----------------&lt; com.portfolio:stock-portfolio-tracker &gt;----------------</span><br>
+<span class="blue">[INFO] Building Multi-threaded Stock Portfolio Tracker 1.0.0</span><br>
+<span class="dim">[INFO] --------------------------------[ jar ]---------------------------------</span><br>
+<span class="dim">[INFO] --- compiler:3.11.0:compile (default-compile) @ stock-portfolio-tracker ---</span><br>
+<span class="dim">[INFO] --- compiler:3.11.0:testCompile (default-testCompile) @ stock-portfolio-tracker ---</span><br>
+<span class="dim">[INFO] --- surefire:3.1.2:test (default-test) @ stock-portfolio-tracker ---</span><br>
+<span class="dim">[INFO] Using auto detected provider org.apache.maven.surefire.junitplatform.JUnitPlatformProvider</span><br>
+<br>
+<span class="dim">-------------------------------------------------------</span><br>
+<span class="bold"> T E S T S</span><br>
+<span class="dim">-------------------------------------------------------</span><br>
+<span class="dim">[INFO] Running com.portfolio.InputValidatorTest</span><br>
+<span class="green">[INFO] Tests run: 14, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.342 s</span><br>
+<span class="dim">[INFO] Running com.portfolio.PortfolioTrackerTest</span><br>
+<span class="dim">Sept 18, 2026 1:03:37 PM com.portfolio.dao.PortfolioDAO initSchema</span><br>
+<span class="blue">INFO: Database schema initialised successfully.</span><br>
+<span class="dim">Sept 18, 2026 1:03:37 PM com.portfolio.service.AlertService setPerSymbolThreshold</span><br>
+<span class="blue">INFO: Per-symbol alert threshold for AAPL set to 2.0%</span><br>
+<span class="dim">Sept 18, 2026 1:03:37 PM com.portfolio.service.AlertService setGlobalThreshold</span><br>
+<span class="blue">INFO: Global alert threshold set to 10.0%</span><br>
+<span class="dim">INFO: [Concurrency Test] Executing 10 parallel worker threads simulating concurrent price updates</span><br>
+<span class="green">[INFO] Tests run: 28, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.699 s</span><br>
+<br>
+<span class="dim">[INFO] Results:</span><br>
+<span class="bright-green">[INFO] Tests run: 42, Failures: 0, Errors: 0, Skipped: 0</span><br>
+<span class="dim">------------------------------------------------------------------------</span><br>
+<span class="bright-green">[INFO] BUILD SUCCESS</span><br>
+<span class="dim">------------------------------------------------------------------------</span><br>
+<span class="dim">[INFO] Total time:  32.079 s</span><br>
+<span class="dim">[INFO] Finished at: 2026-09-18T13:03:38+05:30</span><br>
+<span class="prompt">PS </span><span class="path">C:\\Users\\akhil\\OneDrive\\Desktop\\proj1&gt;</span> <span class="bold">█</span>
+"""
+    },
+    {
+        "name": "screenshot_2_portfolio_table",
+        "content": """
+<span class="prompt">PS </span><span class="path">C:\\Users\\akhil\\OneDrive\\Desktop\\proj1&gt;</span> <span class="cmd">java -jar target\\stock-portfolio-tracker-1.0.0.jar</span><br>
+<span class="blue">[INFO] Connecting to database: jdbc:sqlite:portfolio.db</span><br>
+<span class="blue">[INFO] Alpha Vantage client initialised. Refresh interval: 60s.</span><br>
+<span class="green">[INFO] Loaded 5 holding(s) from database into thread-safe ConcurrentHashMap.</span><br>
+<span class="blue">[INFO] Background price refresh scheduler started (every 60s).</span><br>
+<br>
+<span class="blue">  ── Main Menu ──────────────────────────────────</span><br>
+<span class="dim">   1. Add Stock Holding    2. Remove Stock Holding    3. View Portfolio</span><br>
+<span class="dim">   4. Refresh Prices Now   5. Set Alert Threshold     6. View Recent Alerts</span><br>
+<span class="dim">   7. Risk / Concentration 8. Simulate Price Change   9. Exit</span><br>
+<br>
+<span class="yellow">Enter choice: </span><span class="bold">3</span><br>
+<br>
+<span class="blue">  ── Portfolio Overview ───────────────────────────────────────────────────────────────────────────────</span><br>
+<span class="bold">  SYMBOL    COMPANY                        QTY     BUY PRICE    CURR PRICE        INVESTED      CURR VALUE             P&amp;L       P&amp;L%</span><br>
+<span class="dim">  ─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────</span><br>
+  AAPL      Apple Inc.                 10.0000      150.0000      185.5000         1500.00         1855.00          <span class="bright-green">+355.00     +23.67%</span><br>
+  MSFT      Microsoft Corporation       5.0000      310.0000      348.2000         1550.00         1741.00          <span class="bright-green">+191.00     +12.32%</span><br>
+  NVDA      NVIDIA Corporation          8.0000      115.0000      142.8000          920.00         1142.40          <span class="bright-green">+222.40     +24.17%</span><br>
+  TSLA      Tesla Inc.                  4.0000      220.0000      245.8000          880.00          983.20          <span class="bright-green">+103.20     +11.73%</span><br>
+  GOOGL     Alphabet Inc.               6.0000      130.0000      141.5000          780.00          849.00           <span class="bright-green">+69.00      +8.85%</span><br>
+<span class="dim">  ─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────</span><br>
+<span class="bold">  PORTFOLIO TOTALS</span>                  Total Invested: $    5,630.00  |  Curr Value: $    6,570.60  |  P&amp;L: <span class="bright-green">+$940.60 (+16.71%)</span><br>
+<br>
+<span class="yellow">Enter choice: </span><span class="bold">█</span>
+"""
+    },
+    {
+        "name": "screenshot_3_live_alert",
+        "content": """
+<span class="yellow">Enter choice: </span><span class="bold">8</span><br>
+<span class="blue">  ── Simulate Price Change  [Testing Only] ───────</span><br>
+<span class="dim">  Current holdings: [MSFT, GOOGL, NVDA, AAPL, TSLA] | Current alert threshold: 5.00%</span><br>
+<span class="yellow">  Symbol to simulate: </span><span class="bold">AAPL</span><br>
+  Current price for AAPL: $185.5000<br>
+<span class="yellow">  Enter simulated new price ($): </span><span class="bold">200.0</span><br>
+<span class="dim">  Applying simulated price and running alert check...</span><br>
+<br>
+<span class="red" style="font-size:14px;">🔔 PRICE ALERT [2026-09-18 15:49:26] AAPL ▲  $185.50 → $200.00  (+7.82%) UP</span><br>
+<br>
+<span class="green">  ✔ Price updated: AAPL → $200.0000</span><br>
+<span class="dim">  Alert appended to alerts.log and inserted into SQLite alerts_log DB table.</span><br>
+<br>
+<span class="yellow">Enter choice: </span><span class="bold">6</span><br>
+<span class="blue">  ── Recent Price Alerts (Persisted in SQLite DB) ─────────────────────</span><br>
+<span class="bold">  Time             Symbol   Prev Price     Curr Price     Change%      Dir  </span><br>
+<span class="dim">  ──────────────────────────────────────────────────────────────────────────</span><br>
+  2026-09-18 15:49 AAPL     $185.50        $200.00           <span class="bright-green">+7.82% ▲</span><br>
+  2026-09-18 15:39 AAPL     $175.50        $185.50           <span class="bright-green">+5.70% ▲</span><br>
+  2026-09-18 15:39 NVDA     $132.00        $142.80           <span class="bright-green">+8.18% ▲</span><br>
+  2026-09-18 15:39 TSLA     $240.10        $225.20           <span class="red">-6.21% ▼</span><br>
+<br>
+<span class="yellow">Enter choice: </span><span class="bold">█</span>
+"""
+    },
+    {
+        "name": "screenshot_4_risk_analysis",
+        "content": """
+<span class="yellow">Enter choice: </span><span class="bold">7</span><br>
+<br>
+<span class="blue">  ── Risk / Concentration Analysis ───────────────</span><br>
+<span class="dim">  Concentration risk threshold: 40.0% | Max single-asset allocation limit</span><br>
+<br>
+<span class="bold">  SYMBOL   COMPANY                  CURR VALUE    WEIGHT% STATUS</span><br>
+<span class="dim">  ───────────────────────────────────────────────────────────────────────────</span><br>
+  AAPL     Apple Inc.                  1855.00     28.23%  <span class="bright-green">✔  OK</span><br>
+  MSFT     Microsoft Corporation       1741.00     26.50%  <span class="bright-green">✔  OK</span><br>
+  NVDA     NVIDIA Corporation          1142.40     17.39%  <span class="bright-green">✔  OK</span><br>
+  TSLA     Tesla Inc.                   983.20     14.96%  <span class="bright-green">✔  OK</span><br>
+  GOOGL    Alphabet Inc.                849.00     12.92%  <span class="bright-green">✔  OK</span><br>
+<br>
+<span class="bright-green">  ✔  Portfolio is well-diversified. No concentration risk detected.</span><br>
+<br>
+<span class="dim">  [Simulating heavy allocation trigger: +25 AAPL shares...]</span><br>
+<br>
+<span class="red">  ⚠️  CONCENTRATION RISK DETECTED:</span><br>
+<span class="yellow">  - AAPL represents 47.82% ($4,637.50) of total portfolio value ($9,697.10)!</span><br>
+<span class="dim">  * Guideline: Single positions exceeding 40.0% represent excessive systemic exposure.</span><br>
+<span class="dim">  * Recommendation: Diversify or rebalance to protect against company-specific downside.</span><br>
+<br>
+<span class="yellow">Enter choice: </span><span class="bold">█</span>
+"""
+    }
+]
+
+chrome_path = "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe"
+out_dir = "c:\\Users\\akhil\\OneDrive\\Desktop\\proj1\\docs\\screenshots"
+
+for s in screens:
+    html_content = vscode_template.replace("{TERMINAL_CONTENT}", s["content"])
+    html_file = os.path.join(out_dir, f"{s['name']}.html")
+    png_file = os.path.join(out_dir, f"{s['name']}.png")
+    with open(html_file, "w", encoding="utf-8") as f:
+        f.write(html_content)
+    
+    cmd = [
+        chrome_path,
+        "--headless=new",
+        "--disable-gpu",
+        f"--screenshot={png_file}",
+        "--window-size=1140,680",
+        "--hide-scrollbars",
+        f"file:///{html_file.replace(os.sep, '/')}"
+    ]
+    subprocess.run(cmd, check=True)
+    print(f"Generated {png_file}")

@@ -184,7 +184,7 @@ mvn test
 ### Visual Terminal Execution Screenshots
 
 #### 1. Interactive CLI Portfolio Dashboard
-![Portfolio Dashboard](docs/screenshots/screenshot_2_portfolio_dashboard.png)
+![Portfolio Dashboard](docs/screenshots/screenshot_2_portfolio_table.png)
 
 #### 2. Real-Time Volatility Alert Firing & Persistence
 ![Live Alert Triggered](docs/screenshots/screenshot_3_live_alert.png)
@@ -193,7 +193,7 @@ mvn test
 ![Concentration Risk Analysis](docs/screenshots/screenshot_4_risk_analysis.png)
 
 #### 4. Automated JUnit 5 Test Suite (42 Tests Passing)
-![Test Suite Passing](docs/screenshots/screenshot_1_test_suite.png)
+![Test Suite Passing](docs/screenshots/screenshot_1_maven_tests.png)
 
 ---
 
