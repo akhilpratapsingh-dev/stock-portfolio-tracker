@@ -181,47 +181,19 @@ mvn test
 
 ## Sample CLI Execution & Screenshots
 
-### Terminal Main Menu & Portfolio Table Display
-```
-╔══════════════════════════════════════════════════════════════════════════════════╗
-║                     📈  Multi-threaded Stock Portfolio Tracker                   ║
-║                     Core Java Concurrency & Live Market Alerts                   ║
-╚══════════════════════════════════════════════════════════════════════════════════╝
+### Visual Terminal Execution Screenshots
 
-── Main Menu ──────────────────────────────────────────────
- 1. Add Stock Holding
- 2. Remove Stock Holding
- 3. View Portfolio
- 4. Refresh Prices Now
- 5. Set Alert Threshold
- 6. View Recent Alerts
- 7. Risk / Concentration Analysis
- 8. Simulate Price Change (Test Alerts)
- 9. Exit
-Selection > 3
+#### 1. Interactive CLI Portfolio Dashboard
+![Portfolio Dashboard](docs/screenshots/screenshot_2_portfolio_dashboard.png)
 
-========================================================================================================================
-SYMBOL  COMPANY NAME                   QUANTITY      BUY PRICE      CURR PRICE     TOTAL VALUE    P&L ($)        P&L (%) 
-========================================================================================================================
-AAPL    Apple Inc.                      10.0000       150.0000       175.5000       1755.0000      +255.0000      +17.00%
-MSFT    Microsoft Corporation            5.0000       300.0000       330.0000       1650.0000      +150.0000      +10.00%
-GOOGL   Alphabet Inc.                    8.0000       120.0000       135.2500       1082.0000      +122.0000      +12.71%
-========================================================================================================================
-Total Portfolio Cost:    $4,060.0000
-Total Portfolio Value:   $4,487.0000
-Total Unrealized P&L:    +$427.0000 (+10.52%)
-========================================================================================================================
-```
+#### 2. Real-Time Volatility Alert Firing & Persistence
+![Live Alert Triggered](docs/screenshots/screenshot_3_live_alert.png)
 
-### Real-Time Live Alert Notification
-```
-🔔 ============================ LIVE ALERT ============================
-   [2026-09-13 19:15:02] ALERT FIRED for AAPL
-   Movement: UP (+5.71%)
-   Previous: $175.5000  ──►  Current: $185.5200
-   Threshold: 5.0%
-=======================================================================
-```
+#### 3. Portfolio Concentration Risk Detection Engine
+![Concentration Risk Analysis](docs/screenshots/screenshot_4_risk_analysis.png)
+
+#### 4. Automated JUnit 5 Test Suite (42 Tests Passing)
+![Test Suite Passing](docs/screenshots/screenshot_1_test_suite.png)
 
 ---
 

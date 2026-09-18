@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background-color: #181824;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    padding: 24px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+  }
+  .window {
+    width: 1060px;
+    background: #1e1e2e;
+    border-radius: 12px;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.55), 0 0 0 1px rgba(255,255,255,0.1);
+    overflow: hidden;
+  }
+  .titlebar {
+    background: #181826;
+    padding: 12px 18px;
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid #2a2b3d;
+  }
+  .buttons {
+    display: flex;
+    gap: 8px;
+    margin-right: 18px;
+  }
+  .dot {
+    width: 13px;
+    height: 13px;
+    border-radius: 50%;
+  }
+  .red { background: #ff5f56; }
+  .yellow { background: #ffbd2e; }
+  .green { background: #27c93f; }
+  .title {
+    color: #a6adc8;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.3px;
+    flex-grow: 1;
+    text-align: center;
+    margin-right: 50px;
+  }
+  .terminal-body {
+    padding: 22px 26px;
+    font-family: 'JetBrains Mono', 'Consolas', 'Courier New', monospace;
+    font-size: 13.5px;
+    line-height: 1.55;
+    color: #cdd6f4;
+    min-height: 520px;
+  }
+  .prompt { color: #89b4fa; font-weight: 600; }
+  .path { color: #a6e3a1; }
+  .cmd { color: #f9e2af; font-weight: 600; }
+  .info { color: #89dceb; }
+  .success { color: #a6e3a1; font-weight: 600; }
+  .warn { color: #fab387; }
+  .alert { color: #f38ba8; font-weight: 600; }
+  .highlight { color: #f5c2e7; }
+  .dim { color: #6c7086; }
+  .table-header { color: #cba6f7; font-weight: 700; border-bottom: 1px solid #45475a; }
+  .table-row-pos { color: #a6e3a1; }
+  .table-row-val { color: #cdd6f4; }
+  .box-border { color: #89b4fa; }
+</style>
+</head>
+<body>
+  <div class="window">
+    <div class="titlebar">
+      <div class="buttons">
+        <span class="dot red"></span>
+        <span class="dot yellow"></span>
+        <span class="dot green"></span>
+      </div>
+      <div class="title">Windows Terminal - java -jar target/stock-portfolio-tracker-1.0.0.jar (View Portfolio)</div>
+    </div>
+    <div class="terminal-body">
+      
+<span class="prompt">PS </span><span class="path">C:\Users\akhil\OneDrive\Desktop\proj1&gt;</span> <span class="cmd">java -jar target\stock-portfolio-tracker-1.0.0.jar</span><br>
+<span class="info">[INFO] Connecting to database: jdbc:sqlite:portfolio.db</span><br>
+<span class="info">[INFO] Database schema initialised successfully.</span><br>
+<span class="info">[INFO] Alpha Vantage client initialised. Refresh interval: 60s.</span><br>
+<span class="info">[INFO] Loading portfolio from database...</span><br>
+<span class="success">[INFO] Loaded 4 holding(s) into thread-safe ConcurrentHashMap.</span><br>
+<span class="info">[INFO] Background price refresh scheduler started (Daemon Pool, period: 60s).</span><br>
+<br>
+<span class="box-border">  ╔══════════════════════════════════════════════════════════════════╗</span><br>
+<span class="box-border">  ║</span>     <span class="highlight" style="font-weight:bold;">📈  Multi-threaded Stock Portfolio Tracker with Live Alerts</span>     <span class="box-border">║</span><br>
+<span class="box-border">  ║</span>        <span class="dim">Powered by Alpha Vantage REST API + SQLite JDBC + Java 17</span>   <span class="box-border">║</span><br>
+<span class="box-border">  ╚══════════════════════════════════════════════════════════════════╝</span><br>
+<br>
+<span class="cmd">Enter choice: </span><span class="highlight">3</span><br>
+<br>
+<span class="box-border">========================================================================================================================</span><br>
+<span class="table-header">SYMBOL   COMPANY NAME            QUANTITY    BUY PRICE     CURR PRICE    TOTAL VALUE    P&amp;L ($)       P&amp;L (%)   STATUS</span><br>
+<span class="box-border">========================================================================================================================</span><br>
+<span class="table-row-val">AAPL     Apple Inc.               10.0000     $150.0000     $185.5000     $1,855.0000   </span><span class="table-row-pos">+355.0000     +23.67%   PROFIT</span><br>
+<span class="table-row-val">MSFT     Microsoft Corporation    5.0000     $310.0000     $348.2000     $1,741.0000   </span><span class="table-row-pos">+191.0000     +12.32%   PROFIT</span><br>
+<span class="table-row-val">NVDA     NVIDIA Corporation       8.0000     $115.0000     $142.8000     $1,142.4000   </span><span class="table-row-pos">+222.4000     +24.17%   PROFIT</span><br>
+<span class="table-row-val">GOOGL    Alphabet Inc.            6.0000     $130.0000     $141.5000       $849.0000    </span><span class="table-row-pos">+69.0000      +8.85%   PROFIT</span><br>
+<span class="box-border">========================================================================================================================</span><br>
+<span class="info">Total Portfolio Cost:    </span><span class="highlight">$4,770.0000</span><br>
+<span class="info">Total Current Valuation: </span><span class="highlight">$5,587.4000</span><br>
+<span class="info">Net Unrealized P&amp;L:      </span><span class="success">+$817.4000 (+17.14%)</span><br>
+<span class="box-border">========================================================================================================================</span><br>
+<span class="dim">Active Workers: 5 | Memory Model: ConcurrentHashMap + Monitor Sync | Precision: BigDecimal HALF_UP</span><br>
+<br>
+<span class="cmd">Enter choice: </span><span class="highlight">█</span>
+
+    </div>
+  </div>
+</body>
+</html>

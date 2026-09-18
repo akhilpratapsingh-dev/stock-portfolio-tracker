@@ -8,6 +8,7 @@
 * **Course Domain:** Core & Advanced Java Programming / Software Engineering / Systems Design
 * **Submission Type:** Flipped Course Project Evaluation
 * **Student Name:** Akhil Pratap Singh
+* **Registration Number:** 25BAI11206
 * **Technology Stack:** Java 17 (LTS), Apache Maven, SQLite/MySQL JDBC, Alpha Vantage REST API, Java Concurrency Utilities (`ScheduledExecutorService`, `ExecutorService`, `ConcurrentHashMap`), JUnit 5
 * **Execution Environment:** Terminal / Command Line Interface (CLI)
 * **Date of Submission:** September 2026
@@ -324,37 +325,17 @@ public static String validateSymbol(String input) {
 
 ## 10. Screenshots / Execution Results
 
-### 10.1 Interactive Console Portfolio Valuation
-```
-========================================================================================================================
-SYMBOL  COMPANY NAME                   QUANTITY      BUY PRICE      CURR PRICE     TOTAL VALUE    P&L ($)        P&L (%) 
-========================================================================================================================
-AAPL    Apple Inc.                      10.0000       150.0000       175.5000       1755.0000      +255.0000      +17.00%
-MSFT    Microsoft Corporation            5.0000       300.0000       330.0000       1650.0000      +150.0000      +10.00%
-GOOGL   Alphabet Inc.                    8.0000       120.0000       135.2500       1082.0000      +122.0000      +12.71%
-========================================================================================================================
-Total Portfolio Cost:    $4,060.0000
-Total Portfolio Value:   $4,487.0000
-Total Unrealized P&L:    +$427.0000 (+10.52%)
-========================================================================================================================
-```
+### 10.1 Interactive Console Portfolio Valuation Dashboard
+![Interactive Console Portfolio Valuation](docs/screenshots/screenshot_2_portfolio_dashboard.png)
 
-### 10.2 Real-Time Live Alert Notification
-```
-🔔 ============================ LIVE ALERT ============================
-   [2026-09-13 19:15:02] ALERT FIRED for AAPL
-   Movement: UP (+5.71%)
-   Previous: $175.5000  ──►  Current: $185.5200
-   Threshold: 5.0%
-=======================================================================
-```
+### 10.2 Real-Time Live Alert Notification & Database Dispatch
+![Live Alert Triggered](docs/screenshots/screenshot_3_live_alert.png)
 
-### 10.3 Concentration Risk Warning
-```
-⚠️  CONCENTRATION RISK DETECTED:
-- AAPL represents 42.15% of your total portfolio value!
-  Guideline: Single positions exceeding 40.0% represent excessive systemic risk.
-```
+### 10.3 Portfolio Concentration Risk Analysis Engine
+![Concentration Risk Analysis](docs/screenshots/screenshot_4_risk_analysis.png)
+
+### 10.4 Automated JUnit 5 Verification Suite (42 Passed)
+![Test Suite Passing](docs/screenshots/screenshot_1_test_suite.png)
 
 ---
 

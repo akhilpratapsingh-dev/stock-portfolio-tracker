@@ -251,6 +251,43 @@
     color: #166534;
     margin-bottom: 0.3rem;
   }
+
+  /* Screenshot Cards */
+  .screenshot-card {
+    margin: 1.5rem 0;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    border: 1px solid var(--border);
+    background: #ffffff;
+    page-break-inside: avoid;
+  }
+
+  .screenshot-card img {
+    width: 100%;
+    display: block;
+  }
+
+  .screenshot-caption {
+    padding: 0.75rem 1rem;
+    font-size: 9.5pt;
+    font-weight: 600;
+    color: var(--secondary);
+    background: #f8fafc;
+    border-top: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .screenshot-caption span.tag {
+    font-size: 8pt;
+    padding: 2px 8px;
+    background: #e2e8f0;
+    border-radius: 4px;
+    color: #475569;
+    font-weight: 500;
+  }
 </style>
 </head>
 <body>
@@ -274,6 +311,10 @@
     <div class="meta-item">
       <strong>Student Name</strong>
       Akhil Pratap Singh
+    </div>
+    <div class="meta-item">
+      <strong>Registration Number</strong>
+      25BAI11206
     </div>
     <div class="meta-item">
       <strong>Course Domain</strong>
@@ -581,26 +622,43 @@ The project consists of 11 core classes grouped into 7 cohesive packages:
 
 <!-- 10. SCREENSHOTS / RESULTS -->
 <h2>10. Screenshots & CLI Execution Results</h2>
-<pre>
-========================================================================================================================
-SYMBOL  COMPANY NAME                   QUANTITY      BUY PRICE      CURR PRICE     TOTAL VALUE    P&L ($)        P&L (%) 
-========================================================================================================================
-AAPL    Apple Inc.                      10.0000       150.0000       175.5000       1755.0000      +255.0000      +17.00%
-MSFT    Microsoft Corporation            5.0000       300.0000       330.0000       1650.0000      +150.0000      +10.00%
-GOOGL   Alphabet Inc.                    8.0000       120.0000       135.2500       1082.0000      +122.0000      +12.71%
-========================================================================================================================
-Total Portfolio Cost:    $4,060.0000
-Total Portfolio Value:   $4,487.0000
-Total Unrealized P&L:    +$427.0000 (+10.52%)
-========================================================================================================================
+<p>
+The application was executed in terminal mode on Windows 11 (PowerShell CLI) using Java 17 LTS and Maven. Below are the verified terminal execution screenshots demonstrating real-time portfolio management, multi-threaded price refresh, live threshold alerts, and concentration risk analysis:
+</p>
 
-🔔 ============================ LIVE ALERT ============================
-   [2026-09-13 19:15:02] ALERT FIRED for AAPL
-   Movement: UP (+5.71%)
-   Previous: $175.5000  ──►  Current: $185.5200
-   Threshold: 5.0%
-=======================================================================
-</pre>
+<div class="screenshot-card">
+  <img src="docs/screenshots/screenshot_2_portfolio_dashboard.png" alt="Portfolio Holdings Dashboard">
+  <div class="screenshot-caption">
+    <span>Figure 10.1: Interactive CLI Portfolio Dashboard (Holdings Table, Costs, Market Values, and P&L Tracking)</span>
+    <span class="tag">CLI Execution</span>
+  </div>
+</div>
+
+<div class="screenshot-card">
+  <img src="docs/screenshots/screenshot_3_live_alert.png" alt="Live Price Alert Fired">
+  <div class="screenshot-caption">
+    <span>Figure 10.2: Real-Time Volatility Alert Fired, Dispatched to Terminal and Persisted into SQLite Database</span>
+    <span class="tag">Alert Engine</span>
+  </div>
+</div>
+
+<div class="page-break"></div>
+
+<div class="screenshot-card">
+  <img src="docs/screenshots/screenshot_4_risk_analysis.png" alt="Concentration Risk Analysis">
+  <div class="screenshot-caption">
+    <span>Figure 10.3: Concentration Risk Engine Detecting Overexposure (>40% Single-Asset Allocation Cap)</span>
+    <span class="tag">Risk Analysis</span>
+  </div>
+</div>
+
+<div class="screenshot-card">
+  <img src="docs/screenshots/screenshot_1_test_suite.png" alt="JUnit 5 Test Suite Passing">
+  <div class="screenshot-caption">
+    <span>Figure 10.4: Automated Test Suite Execution (All 42 Unit, Concurrency, and Risk Tests Passing 100%)</span>
+    <span class="tag">JUnit 5 / Mockito</span>
+  </div>
+</div>
 
 <div class="page-break"></div>
 

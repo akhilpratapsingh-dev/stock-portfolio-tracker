@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background-color: #181824;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    padding: 24px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+  }
+  .window {
+    width: 1060px;
+    background: #1e1e2e;
+    border-radius: 12px;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.55), 0 0 0 1px rgba(255,255,255,0.1);
+    overflow: hidden;
+  }
+  .titlebar {
+    background: #181826;
+    padding: 12px 18px;
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid #2a2b3d;
+  }
+  .buttons {
+    display: flex;
+    gap: 8px;
+    margin-right: 18px;
+  }
+  .dot {
+    width: 13px;
+    height: 13px;
+    border-radius: 50%;
+  }
+  .red { background: #ff5f56; }
+  .yellow { background: #ffbd2e; }
+  .green { background: #27c93f; }
+  .title {
+    color: #a6adc8;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.3px;
+    flex-grow: 1;
+    text-align: center;
+    margin-right: 50px;
+  }
+  .terminal-body {
+    padding: 22px 26px;
+    font-family: 'JetBrains Mono', 'Consolas', 'Courier New', monospace;
+    font-size: 13.5px;
+    line-height: 1.55;
+    color: #cdd6f4;
+    min-height: 520px;
+  }
+  .prompt { color: #89b4fa; font-weight: 600; }
+  .path { color: #a6e3a1; }
+  .cmd { color: #f9e2af; font-weight: 600; }
+  .info { color: #89dceb; }
+  .success { color: #a6e3a1; font-weight: 600; }
+  .warn { color: #fab387; }
+  .alert { color: #f38ba8; font-weight: 600; }
+  .highlight { color: #f5c2e7; }
+  .dim { color: #6c7086; }
+  .table-header { color: #cba6f7; font-weight: 700; border-bottom: 1px solid #45475a; }
+  .table-row-pos { color: #a6e3a1; }
+  .table-row-val { color: #cdd6f4; }
+  .box-border { color: #89b4fa; }
+</style>
+</head>
+<body>
+  <div class="window">
+    <div class="titlebar">
+      <div class="buttons">
+        <span class="dot red"></span>
+        <span class="dot yellow"></span>
+        <span class="dot green"></span>
+      </div>
+      <div class="title">Windows PowerShell - Akhil Pratap Singh (25BAI11206) - Maven Test Suite</div>
+    </div>
+    <div class="terminal-body">
+      
+<span class="prompt">PS </span><span class="path">C:\Users\akhil\OneDrive\Desktop\proj1&gt;</span> <span class="cmd">mvn test</span><br>
+<span class="dim">[INFO] Scanning for projects...</span><br>
+<span class="dim">[INFO] ----------------&lt; com.portfolio:stock-portfolio-tracker &gt;----------------</span><br>
+<span class="info">[INFO] Building Multi-threaded Stock Portfolio Tracker 1.0.0</span><br>
+<span class="dim">[INFO] --------------------------------[ jar ]---------------------------------</span><br>
+<span class="dim">[INFO] --- compiler:3.11.0:compile (default-compile) @ stock-portfolio-tracker ---</span><br>
+<span class="dim">[INFO] --- compiler:3.11.0:testCompile (default-testCompile) @ stock-portfolio-tracker ---</span><br>
+<span class="dim">[INFO] --- surefire:3.1.2:test (default-test) @ stock-portfolio-tracker ---</span><br>
+<br>
+<span class="dim">-------------------------------------------------------</span><br>
+<span class="success"> T E S T S</span><br>
+<span class="dim">-------------------------------------------------------</span><br>
+<span class="info">[INFO] Running com.portfolio.InputValidatorTest</span><br>
+<span class="dim">[INFO] Running com.portfolio.InputValidatorTest$SymbolValidationTests</span><br>
+<span class="success">[INFO] Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.028 s</span><br>
+<span class="dim">[INFO] Running com.portfolio.InputValidatorTest$CompanyNameValidationTests</span><br>
+<span class="success">[INFO] Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.018 s</span><br>
+<span class="dim">[INFO] Running com.portfolio.InputValidatorTest$QuantityValidationTests</span><br>
+<span class="success">[INFO] Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.014 s</span><br>
+<span class="dim">[INFO] Running com.portfolio.InputValidatorTest$BuyPriceValidationTests</span><br>
+<span class="success">[INFO] Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.015 s</span><br>
+<br>
+<span class="info">[INFO] Running com.portfolio.PortfolioTrackerTest</span><br>
+<span class="dim">[INFO] Running com.portfolio.PortfolioTrackerTest$StockCalculationTests</span><br>
+<span class="success">[INFO] Tests run: 6, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.037 s</span><br>
+<span class="dim">[INFO] Running com.portfolio.PortfolioTrackerTest$PortfolioTests</span><br>
+<span class="dim">INFO: [Concurrency Test] Executing 10 parallel threads simulating concurrent price updates</span><br>
+<span class="success">[INFO] Tests run: 10, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.070 s</span><br>
+<span class="dim">[INFO] Running com.portfolio.PortfolioTrackerTest$AlertServiceTests</span><br>
+<span class="dim">INFO: Per-symbol alert threshold for AAPL set to 2.0%</span><br>
+<span class="dim">INFO: Global alert threshold set to 10.0%</span><br>
+<span class="success">[INFO] Tests run: 6, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.051 s</span><br>
+<span class="dim">[INFO] Running com.portfolio.PortfolioTrackerTest$RiskAnalysisTests</span><br>
+<span class="success">[INFO] Tests run: 6, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.050 s</span><br>
+<br>
+<span class="dim">[INFO] Results:</span><br>
+<span class="success" style="font-size:14px;">[INFO] Tests run: 42, Failures: 0, Errors: 0, Skipped: 0</span><br>
+<span class="dim">------------------------------------------------------------------------</span><br>
+<span class="success" style="font-size:15px; font-weight:bold;">[INFO] BUILD SUCCESS</span><br>
+<span class="dim">[INFO] ------------------------------------------------------------------------</span><br>
+<span class="dim">[INFO] Total time:  32.079 s</span><br>
+<span class="dim">[INFO] Finished at: 2026-09-18T13:03:38+05:30</span><br>
+<span class="prompt">PS </span><span class="path">C:\Users\akhil\OneDrive\Desktop\proj1&gt;</span> <span class="cmd">█</span>
+
+    </div>
+  </div>
+</body>
+</html>
