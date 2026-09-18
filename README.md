@@ -186,13 +186,16 @@ mvn test
 #### 1. Interactive CLI Portfolio Dashboard
 ![Portfolio Dashboard](docs/screenshots/screenshot_2_portfolio_table.png)
 
-#### 2. Real-Time Volatility Alert Firing & Persistence
+#### 2. Real-Time Volatility Alert Firing & Simulation
 ![Live Alert Triggered](docs/screenshots/screenshot_3_live_alert.png)
 
-#### 3. Portfolio Concentration Risk Detection Engine
+#### 3. Recent Alerts Persisted in Relational Database
+![Recent Alerts Log](docs/screenshots/screenshot_3b_recent_alerts.png)
+
+#### 4. Portfolio Concentration Risk Detection Engine
 ![Concentration Risk Analysis](docs/screenshots/screenshot_4_risk_analysis.png)
 
-#### 4. Automated JUnit 5 Test Suite (42 Tests Passing)
+#### 5. Automated JUnit 5 Test Suite (42 Tests Passing)
 ![Test Suite Passing](docs/screenshots/screenshot_1_maven_tests.png)
 
 ---

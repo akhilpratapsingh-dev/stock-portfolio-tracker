@@ -328,13 +328,16 @@ public static String validateSymbol(String input) {
 ### 10.1 Interactive Console Portfolio Valuation Dashboard
 ![Interactive Console Portfolio Valuation](docs/screenshots/screenshot_2_portfolio_table.png)
 
-### 10.2 Real-Time Live Alert Notification & Database Dispatch
+### 10.2 Real-Time Live Alert Notification & Simulation
 ![Live Alert Triggered](docs/screenshots/screenshot_3_live_alert.png)
 
-### 10.3 Portfolio Concentration Risk Analysis Engine
+### 10.3 Recent Volatility Alerts Persisted in Database
+![Recent Alerts Log](docs/screenshots/screenshot_3b_recent_alerts.png)
+
+### 10.4 Portfolio Concentration Risk Analysis Engine
 ![Concentration Risk Analysis](docs/screenshots/screenshot_4_risk_analysis.png)
 
-### 10.4 Automated JUnit 5 Verification Suite (42 Passed)
+### 10.5 Automated JUnit 5 Verification Suite (42 Passed)
 ![Test Suite Passing](docs/screenshots/screenshot_1_maven_tests.png)
 
 ---
